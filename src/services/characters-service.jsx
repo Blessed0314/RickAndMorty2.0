@@ -1,10 +1,9 @@
 import axios from "axios";
 
-const FetchCharacters = async () => {
-  const urlBase = "https://rickandmortyapi.com/api/character";
+const FetchCharacters = async (url) => {
   try {
-    const response = await axios.get(urlBase);
-    const data = response.data.results;
+    const response = await axios.get(url);
+    const data = response.data;
     return data;
   } catch (error) {
     console.log(error);
@@ -12,5 +11,7 @@ const FetchCharacters = async () => {
   
     
 };
+
+
 
 export default FetchCharacters;
