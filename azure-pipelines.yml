@@ -1,5 +1,8 @@
 trigger:
-- develop
+  branches:
+    include:
+      - develop
+      - main
 
 pool:
   vmImage: 'ubuntu-latest'
@@ -14,6 +17,18 @@ steps:
     npm install
   displayName: 'Install dependencies'
 
+- task: SonarCloudPrepare@1
+  inputs:
+    SonarCloud: 'SonarCloudService' # Nombre del servicio de conexión de SonarCloud en Azure DevOps
+    organization: 'DS2Team9' # Nombre de tu organización en SonarCloud
+    scannerMode: 'CLI'
+    configMode: 'manual'
+    cliProjectKey: 'Blessed0314_RickAndMorty2.0' # Clave del proyecto en SonarCloud
+    cliProjectName: 'RickAndMorty2.0' # Nombre del proyecto en SonarCloud
+    cliSources: '.'
+    extraProperties: |
+      sonar.javascript.lcov.reportPaths=coverage/lcov.info # Ruta al informe de cobertura de pruebas
+
 - script: |
     npm run build
   displayName: 'Build the project'
@@ -21,6 +36,14 @@ steps:
 - script: |
     npm test
   displayName: 'Run tests'
+
+- task: SonarCloudAnalyze@1
+  displayName: 'Run SonarCloud analysis'
+
+- task: SonarCloudPublish@1
+  inputs:
+    pollingTimeoutSec: '300'
+  displayName: 'Publish SonarCloud analysis results'
 
 - task: CopyFiles@2
   inputs:
