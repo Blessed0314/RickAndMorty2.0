@@ -1,0 +1,58 @@
+trigger:
+  branches:
+    include:
+      - develop
+      - main
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+steps:
+- task: NodeTool@0
+  inputs:
+    versionSpec: '14.x'
+  displayName: 'Install Node.js'
+
+- script: |
+    npm install
+  displayName: 'Install dependencies'
+
+- task: SonarCloudPrepare@1
+  inputs:
+    SonarCloud: 'SonarCloudService' # Nombre del servicio de conexión de SonarCloud en Azure DevOps
+    organization: 'DS2Team9' # Nombre de tu organización en SonarCloud
+    scannerMode: 'CLI'
+    configMode: 'manual'
+    cliProjectKey: 'Blessed0314_RickAndMorty2.0' # Clave del proyecto en SonarCloud
+    cliProjectName: 'RickAndMorty2.0' # Nombre del proyecto en SonarCloud
+    cliSources: '.'
+    extraProperties: |
+      sonar.javascript.lcov.reportPaths=coverage/lcov.info # Ruta al informe de cobertura de pruebas
+
+- script: |
+    npm run build
+  displayName: 'Build the project'
+
+- script: |
+    npm test
+  displayName: 'Run tests'
+
+- task: SonarCloudAnalyze@1
+  displayName: 'Run SonarCloud analysis'
+
+- task: SonarCloudPublish@1
+  inputs:
+    pollingTimeoutSec: '300'
+  displayName: 'Publish SonarCloud analysis results'
+
+- task: CopyFiles@2
+  inputs:
+    contents: 'build/**'
+    targetFolder: '$(Build.ArtifactStagingDirectory)'
+  displayName: 'Copy build output to artifact staging directory'
+
+- task: PublishBuildArtifacts@1
+  inputs:
+    pathToPublish: '$(Build.ArtifactStagingDirectory)'
+    artifactName: 'drop'
+  displayName: 'Publish build artifacts'
