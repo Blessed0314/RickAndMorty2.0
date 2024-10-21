@@ -34,8 +34,8 @@ steps:
   displayName: 'Build the project'
 
 - script: |
-    npm test
-  displayName: 'Run tests'
+    npm test -- --coverage
+  displayName: 'Run tests with coverage'
 
 - task: SonarCloudAnalyze@1
   displayName: 'Run SonarCloud analysis'

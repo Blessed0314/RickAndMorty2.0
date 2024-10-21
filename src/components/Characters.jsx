@@ -7,8 +7,8 @@ const Characters = ({ characters }) => {
       {characters &&
         characters.map((character, index) => (
           <Character 
+            key={character.id || index}
             character={character} 
-            index={index} 
           />
         ))}
     </div>

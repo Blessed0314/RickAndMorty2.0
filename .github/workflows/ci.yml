@@ -1,0 +1,41 @@
+name: CI
+
+on: [push, pull_request]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v2
+      with:
+        node-version: '20'
+
+    - name: Install dependencies
+      run: npm install
+
+    - name: Run tests with coverage
+      run: npm test -- --coverage
+
+    - name: Run SonarCloud Scan in Docker
+      run: |
+        docker run --rm \
+          -v $(pwd):/usr/src/app \
+          -w /usr/src/app \
+          sonarsource/sonar-scanner-cli \
+          sonar-scanner \
+          -Dsonar.projectKey=Blessed0314_RickAndMorty2.0 \
+          -Dsonar.organization=ds2team9 \
+          -Dsonar.sources=. \
+          -Dsonar.tests=src \
+          -Dsonar.test.inclusions=**/*.test.js,**/*.test.jsx \
+          -Dsonar.javascript.lcov.reportPaths=coverage/lcov.info \
+          -Dsonar.host.url=https://sonarcloud.io \
+          -Dsonar.login=${{ secrets.SONAR_TOKEN }}
+
+
+
