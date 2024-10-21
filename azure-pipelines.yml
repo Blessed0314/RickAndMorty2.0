@@ -7,10 +7,19 @@ trigger:
 pool:
   vmImage: 'ubuntu-latest'
 
+variables:
+  - group: GoogleChatWebhook
+
+resources:
+  repositories:
+    - repository: notificaciones
+      name:  DS2-Devops/notificaciones
+      type: git
+
 steps:
 - task: NodeTool@0
   inputs:
-    versionSpec: '14.x'
+    versionSpec: '20.x'
   displayName: 'Install Node.js'
 
 - script: |
@@ -20,14 +29,14 @@ steps:
 - task: SonarCloudPrepare@1
   inputs:
     SonarCloud: 'SonarCloudService' # Nombre del servicio de conexión de SonarCloud en Azure DevOps
-    organization: 'DS2Team9' # Nombre de tu organización en SonarCloud
+    organization: 'ds2team9' # Nombre de tu organización en SonarCloud
     scannerMode: 'CLI'
     configMode: 'manual'
     cliProjectKey: 'Blessed0314_RickAndMorty2.0' # Clave del proyecto en SonarCloud
     cliProjectName: 'RickAndMorty2.0' # Nombre del proyecto en SonarCloud
     cliSources: '.'
     extraProperties: |
-      sonar.javascript.lcov.reportPaths=coverage/lcov.info # Ruta al informe de cobertura de pruebas
+      sonar.javascript.lcov.reportPaths=coverage/lcov.info
 
 - script: |
     npm run build
@@ -56,3 +65,5 @@ steps:
     pathToPublish: '$(Build.ArtifactStagingDirectory)'
     artifactName: 'drop'
   displayName: 'Publish build artifacts'
+
+- template: notificaciones.yml@notificaciones
