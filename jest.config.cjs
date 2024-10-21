@@ -13,6 +13,6 @@ module.exports = {
   coverageDirectory: 'coverage', // Carpeta donde se guardará el informe de cobertura
   coverageReporters: ['html', 'text', 'lcov'], // Tipos de informes de cobertura que se generarán
   transformIgnorePatterns: [
-    'node_modules/(?!(YOUR_MODULE_HERE)/)', // Añade aquí los módulos que necesiten ser transformados
+    'node_modules/(?!(.*@testing-library)/)', // Transforma los módulos de @testing-library
   ],
 };
