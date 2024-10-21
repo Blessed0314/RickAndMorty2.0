@@ -30,22 +30,18 @@ jobs:
     - name: Run tests with coverage
       run: npm test -- --coverage
 
-    - name: Install SonarScanner
-      run: |
-        curl -sSLo sonar-scanner.zip https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-4.8.0.2856-linux.zip
-        unzip sonar-scanner.zip
-        rm sonar-scanner.zip
-
     - name: Run SonarCloud Scan
-      run: |
-        ./sonar-scanner-4.8.0.2856-linux/bin/sonar-scanner \
-          -Dsonar.projectKey=Blessed0314_RickAndMorty2.0 \
-          -Dsonar.organization=ds2team9 \
-          -Dsonar.sources=. \
-          -Dsonar.tests=src \
-          -Dsonar.test.inclusions=**/*.test.js,**/*.test.jsx \
-          -Dsonar.javascript.lcov.reportPaths=coverage/lcov.info \
+      uses: SonarSource/sonarcloud-github-action@v1.4
+      with:
+        args: >
+          -Dsonar.projectKey=Blessed0314_RickAndMorty2.0
+          -Dsonar.organization=ds2team9
+          -Dsonar.sources=.
+          -Dsonar.tests=src
+          -Dsonar.test.inclusions=**/*.test.js,**/*.test.jsx
+          -Dsonar.javascript.lcov.reportPaths=coverage/lcov.info
           -Dsonar.host.url=https://sonarcloud.io
       env:
         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         JAVA_HOME: ${{ steps.setup-java.outputs.java-home }}
+
