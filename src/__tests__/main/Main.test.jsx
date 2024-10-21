@@ -1,36 +1,32 @@
 /* eslint-disable no-undef */
 import React from 'react';
-import { render } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import { createRoot } from 'react-dom/client';
+import { act } from '@testing-library/react';
 import App from '../../App';
 
-describe('App Component', () => {
-  test('renders App component inside StrictMode', () => {
-    const rootElement = document.createElement('div');
-    rootElement.setAttribute('id', 'root');
+describe('Main Component', () => {
+  let rootElement;
+
+  beforeEach(() => {
+    rootElement = document.createElement('div');
+    rootElement.id = 'root'; // Configurar el id del elemento raíz
     document.body.appendChild(rootElement);
-
-    createRoot(rootElement).render(
-      <React.StrictMode>
-        <App />
-      </React.StrictMode>
-    );
-
-    expect(rootElement).toBeInTheDocument();
   });
 
-  
-  test('root element is created with correct ID', () => {
-    const rootElement = document.createElement('div');
-    rootElement.setAttribute('id', 'root');
-    document.body.appendChild(rootElement);
+  afterEach(() => {
+    document.body.removeChild(rootElement);
+    rootElement = null;
+  });
 
-    createRoot(rootElement).render(
-      <React.StrictMode>
-        <App />
-      </React.StrictMode>
-    );
+  test('renders App component', () => {
+    act(() => {
+      createRoot(rootElement).render(
+        <React.StrictMode>
+          <App />
+        </React.StrictMode>
+      );
+    });
 
     expect(rootElement.id).toBe('root');
   });
