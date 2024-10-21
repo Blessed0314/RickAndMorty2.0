@@ -28,4 +28,4 @@ const Pagination = ({ prev, next, onPrev, onNext }) => {
   )
 }
 
-export default Pagination
+export default Pagination;
