@@ -10,7 +10,7 @@ pool:
 steps:
 - task: NodeTool@0
   inputs:
-    versionSpec: '14.x'
+    versionSpec: '20.x'
   displayName: 'Install Node.js'
 
 - script: |
@@ -20,7 +20,7 @@ steps:
 - task: SonarCloudPrepare@1
   inputs:
     SonarCloud: 'SonarCloudService' # Nombre del servicio de conexión de SonarCloud en Azure DevOps
-    organization: 'DS2Team9' # Nombre de tu organización en SonarCloud
+    organization: 'ds2team9' # Nombre de tu organización en SonarCloud
     scannerMode: 'CLI'
     configMode: 'manual'
     cliProjectKey: 'Blessed0314_RickAndMorty2.0' # Clave del proyecto en SonarCloud
