@@ -7,6 +7,15 @@ trigger:
 pool:
   vmImage: 'ubuntu-latest'
 
+variables:
+  - group: GoogleChatWebhook
+
+resources:
+  repositories:
+    - repository: notificaciones
+      name:  DS2-Devops/notificaciones
+      type: git
+
 steps:
 - task: NodeTool@0
   inputs:
@@ -27,7 +36,7 @@ steps:
     cliProjectName: 'RickAndMorty2.0' # Nombre del proyecto en SonarCloud
     cliSources: '.'
     extraProperties: |
-      sonar.javascript.lcov.reportPaths=coverage/lcov.info # Ruta al informe de cobertura de pruebas
+      sonar.javascript.lcov.reportPaths=coverage/lcov.info
 
 - script: |
     npm run build
@@ -56,3 +65,5 @@ steps:
     pathToPublish: '$(Build.ArtifactStagingDirectory)'
     artifactName: 'drop'
   displayName: 'Publish build artifacts'
+
+- template: notificaciones.yml@notificaciones
