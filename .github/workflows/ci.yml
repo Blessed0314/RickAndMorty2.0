@@ -14,13 +14,13 @@ jobs:
       uses: actions/setup-node@v2
       with:
         node-version: '20'
-    
+
     - name: Set up JDK 17
       uses: actions/setup-java@v2
       with:
         distribution: 'adopt'
         java-version: '17'
-  
+
     - name: Print Java version
       run: java -version
 
@@ -30,16 +30,23 @@ jobs:
     - name: Run tests with coverage
       run: npm test -- --coverage
 
-    - name: SonarCloud Scan
-      uses: SonarSource/sonarcloud-github-action@v1.4
+    - name: Install SonarScanner
+      run: |
+        curl -sSLo sonar-scanner.zip https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-4.8.0.2856-linux.zip
+        unzip sonar-scanner.zip
+        rm sonar-scanner.zip
+        export PATH=$PATH:$PWD/sonar-scanner-4.8.0.2856-linux/bin
+
+    - name: Run SonarCloud Scan
+      run: |
+        sonar-scanner \
+          -Dsonar.projectKey=Blessed0314_RickAndMorty2.0 \
+          -Dsonar.organization=ds2team9 \
+          -Dsonar.sources=. \
+          -Dsonar.tests=src \
+          -Dsonar.test.inclusions=**/*.test.js,**/*.test.jsx \
+          -Dsonar.javascript.lcov.reportPaths=coverage/lcov.info \
+          -Dsonar.host.url=https://sonarcloud.io
       env:
         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-      with:
-        args: >
-          -Dsonar.projectKey=Blessed0314_RickAndMorty2.0
-          -Dsonar.organization=ds2team9
-          -Dsonar.sources=.
-          -Dsonar.tests=src
-          -Dsonar.test.inclusions=**/*.test.js,**/*.test.jsx
-          -Dsonar.javascript.lcov.reportPaths=coverage/lcov.info
-          -Dsonar.host.url=https://sonarcloud.io
+        JAVA_HOME: ${{ steps.setup-java.outputs.path }}
