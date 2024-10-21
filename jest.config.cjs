@@ -15,4 +15,5 @@ module.exports = {
   transformIgnorePatterns: [
     'node_modules/(?!(.*@testing-library)/)', // Transforma los módulos de @testing-library
   ],
+  setupFilesAfterEnv: ['<rootDir>/jest.setup.js'],
 };
