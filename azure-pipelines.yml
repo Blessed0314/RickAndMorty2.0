@@ -56,3 +56,11 @@ steps:
     pathToPublish: '$(Build.ArtifactStagingDirectory)'
     artifactName: 'drop'
   displayName: 'Publish build artifacts'
+
+- script: |
+    curl -X POST -H 'Content-Type: application/json' \
+    -d '{
+          "text": "Build $(Build.BuildNumber) completed with status: $(Build.Status)"
+        }' \
+    https://chat.googleapis.com/v1/spaces/AAAAdXE2Vsc/messages?key=AIzaSyDdI0hCZtE6vySjMm-WEfRq3CPzqKqqsHI&token=7ww4J3CaW_v-zeuiMfDyYCWWkP_G64gxGI_YXifIDyk
+  displayName: 'Notify Google Chat'
