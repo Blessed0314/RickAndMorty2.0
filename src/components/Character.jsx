@@ -1,9 +1,9 @@
 import React from "react";
 import CharacterData from "./CharacterData";
 
-const Character = ({ character, index }) => {
+const Character = ({ character }) => {
   return (
-    <div key={index} className="col mb-4">
+    <div className="col mb-4">
       <div className="card" style={{ minWidth: "200px" }}>
         <img src={character.image} alt="" />
         <CharacterData 
