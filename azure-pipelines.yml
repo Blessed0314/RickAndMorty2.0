@@ -6,9 +6,7 @@ trigger:
 
 pool:
   vmImage: 'ubuntu-latest'
-
-variables:
-  - group: GoogleChatWebhook
+  
 
 resources:
   repositories:
@@ -21,6 +19,7 @@ variables:
       - group: s3-environments-dev
   - ${{ if eq(variables['Build.SourceBranchName'], 'main') }}:
       - group: s3-environments-pdn
+  - group: GoogleChatWebhook
 
 steps:
 - task: NodeTool@0
