@@ -16,6 +16,12 @@ resources:
       name:  DS2-Devops/notificaciones
       type: git
 
+variables:
+  - ${{ if eq(variables['Build.SourceBranchName'], 'develop') }}:
+      - group: s3-environments-dev
+  - ${{ if eq(variables['Build.SourceBranchName'], 'main') }}:
+      - group: s3-environments-pdn
+
 steps:
 - task: NodeTool@0
   inputs:
@@ -37,7 +43,6 @@ steps:
     cliSources: '.'
     extraProperties: |
       sonar.javascript.lcov.reportPaths=coverage/lcov.info
-      sonar.exclusions=**/__test__/**/*.jsx,**/__test__/**/*.js,**/__tests__/**,**/example/**
 
 - script: |
     npm run build
@@ -68,3 +73,13 @@ steps:
   displayName: 'Publish build artifacts'
 
 - template: notificaciones.yml@notificaciones
+
+# Subir archivos a un bucket
+- task: AWSCLI@1
+  displayName: 'Sincronizar con S3'
+  inputs:
+    awsCredentials: 'DS2_SC_S3'
+    regionName: 'us-east-1'
+    awsCommand: 's3'
+    awsSubCommand: 'sync'
+    awsArguments: './$(Build.Repository.Name) s3://$(bucket)--region us-east-1'
