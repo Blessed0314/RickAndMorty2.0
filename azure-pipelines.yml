@@ -7,8 +7,7 @@ trigger:
 pool:
   vmImage: 'ubuntu-latest'
 
-variables:
-  - group: GoogleChatWebhook
+  
 
 resources:
   repositories:
@@ -21,6 +20,7 @@ variables:
       - group: s3-environments-dev
   - ${{ if eq(variables['Build.SourceBranchName'], 'main') }}:
       - group: s3-environments-pdn
+  - group: GoogleChatWebhook
 
 steps:
 - task: NodeTool@0
@@ -82,4 +82,4 @@ steps:
     regionName: 'us-east-1'
     awsCommand: 's3'
     awsSubCommand: 'sync'
-    awsArguments: './$(Build.Repository.Name) s3://$(bucket)--region us-east-1'
+    awsArguments: './Blessed0314/RickAndMorty2.0 s3://$(bucket)'
