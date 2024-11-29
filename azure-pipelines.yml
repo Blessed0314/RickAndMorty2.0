@@ -7,8 +7,7 @@ trigger:
 pool:
   vmImage: 'ubuntu-latest'
 
-  
-
+ 
 resources:
   repositories:
     - repository: notificaciones
@@ -72,7 +71,7 @@ steps:
     artifactName: 'drop'
   displayName: 'Publish build artifacts'
 
-- template: notificaciones.yml@notificaciones
+
 
 # Subir archivos a un bucket
 - task: AWSCLI@1
