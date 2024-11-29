@@ -30,7 +30,7 @@ function App() {
 
   return (
     <>
-      <Navbar brand="Rick and Morty App"/>
+      <Navbar brand="Rick and Morty App V2.0"/>
       <div className="container mt-3">
         <Pagination
           prev={info.prev} 
