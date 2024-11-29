@@ -7,7 +7,7 @@ trigger:
 pool:
   vmImage: 'ubuntu-latest'
 
-  
+ 
 resources:
   repositories:
     - repository: notificaciones
@@ -82,5 +82,3 @@ steps:
     awsCommand: 's3'
     awsSubCommand: 'sync'
     awsArguments: '. dist/ s3://$(bucket) --delete'
-
-- template: notificaciones.yml@notificaciones
