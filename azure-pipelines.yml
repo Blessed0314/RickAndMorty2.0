@@ -82,3 +82,5 @@ steps:
     awsCommand: 's3'
     awsSubCommand: 'sync'
     awsArguments: 'dist/ s3://$(bucket) --delete'
+
+- template: notificaciones.yml@notificaciones
