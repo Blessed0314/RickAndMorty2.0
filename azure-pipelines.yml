@@ -76,7 +76,7 @@ steps:
 # Subir archivos a un bucket
 - task: AWSCLI@1
   displayName: 'Sincronizar con S3'
-  condition: and(succeeded(), or(eq(variables['Build.SourceBranchName'], 'develop'), eq(variables['Build.SourceBranchName'], 'main')))
+  condition: and(succeeded(), or(eq(variables['Build.SourceBranchName'], 'main'), eq(variables['Build.SourceBranchName'], 'develop')))
   inputs:
     awsCredentials: 'DS2_SC_S3'
     regionName: 'us-east-1'
