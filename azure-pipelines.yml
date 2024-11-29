@@ -6,8 +6,8 @@ trigger:
 
 pool:
   vmImage: 'ubuntu-latest'
-  
 
+  
 resources:
   repositories:
     - repository: notificaciones
@@ -71,7 +71,7 @@ steps:
     artifactName: 'drop'
   displayName: 'Publish build artifacts'
 
-- template: notificaciones.yml@notificaciones
+
 
 # Subir archivos a un bucket
 - task: AWSCLI@1
@@ -81,4 +81,6 @@ steps:
     regionName: 'us-east-1'
     awsCommand: 's3'
     awsSubCommand: 'sync'
-    awsArguments: './$(Build.Repository.Name) s3://$(bucket)--region us-east-1'
+    awsArguments: '. s3://$(bucket)'
+
+- template: notificaciones.yml@notificaciones
