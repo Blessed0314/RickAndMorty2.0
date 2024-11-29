@@ -81,5 +81,4 @@ steps:
     regionName: 'us-east-1'
     awsCommand: 's3'
     awsSubCommand: 'sync'
-    awsArguments: './Blessed0314/RickAndMorty2.0 s3://$(bucket)'
-
+    awsArguments: '. s3://$(bucket)'
