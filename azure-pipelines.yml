@@ -81,4 +81,4 @@ steps:
     regionName: 'us-east-1'
     awsCommand: 's3'
     awsSubCommand: 'sync'
-    awsArguments: '. dist/ s3://$(bucket) --delete'
+    awsArguments: 'dist/ s3://$(bucket) --delete'
