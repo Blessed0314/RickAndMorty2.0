@@ -7,14 +7,19 @@ trigger:
 pool:
   vmImage: 'ubuntu-latest'
 
-variables:
-  - group: GoogleChatWebhook
-
+ 
 resources:
   repositories:
     - repository: notificaciones
       name:  DS2-Devops/notificaciones
       type: git
+
+variables:
+  - ${{ if eq(variables['Build.SourceBranchName'], 'develop') }}:
+      - group: s3-environments-dev
+  - ${{ if eq(variables['Build.SourceBranchName'], 'main') }}:
+      - group: s3-environments-pdn
+  - group: GoogleChatWebhook
 
 steps:
 - task: NodeTool@0
@@ -38,6 +43,7 @@ steps:
     extraProperties: |
       sonar.javascript.lcov.reportPaths=coverage/lcov.info
       sonar.exclusions=**/__test__/**/*.jsx,**/__test__/**/*.js,**/__tests__/**,**/example/**, README.md
+
 
 - script: |
     npm run build
@@ -67,4 +73,19 @@ steps:
     artifactName: 'drop'
   displayName: 'Publish build artifacts'
 
+
+
+# Subir archivos a un bucket
+- task: AWSCLI@1
+  displayName: 'Sincronizar con S3'
+  condition: and(succeeded(), or(eq(variables['Build.SourceBranchName'], 'main'), eq(variables['Build.SourceBranchName'], 'develop')))
+  inputs:
+    awsCredentials: 'DS2_SC_S3'
+    regionName: 'us-east-1'
+    awsCommand: 's3'
+    awsSubCommand: 'sync'
+    awsArguments: 'dist/ s3://$(bucket) --delete'
+
 - template: notificaciones.yml@notificaciones
+
+
