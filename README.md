@@ -1,4 +1,4 @@
-# Rick and Morty App V2.0
+# Rick and Morty App
 
 This project is a web application developed with **React** that consumes the Rick and Morty API to display information about the series' characters.
 
