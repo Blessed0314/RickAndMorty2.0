@@ -37,7 +37,7 @@ steps:
     cliSources: '.'
     extraProperties: |
       sonar.javascript.lcov.reportPaths=coverage/lcov.info
-      sonar.exclusions=**/__test__/**/*.jsx,**/__test__/**/*.js,**/__tests__/**,**/example/**
+      sonar.exclusions=**/__test__/**/*.jsx,**/__test__/**/*.js,**/__tests__/**,**/example/**, README.md
 
 - script: |
     npm run build
