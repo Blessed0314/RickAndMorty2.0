@@ -1,163 +1,184 @@
 # Rick and Morty App V2.0
 
-Este proyecto es una aplicación web desarrollada con **React** que consume la API de Rick and Morty para mostrar información sobre los personajes de la serie.
+This project is a web application developed with **React** that consumes the Rick and Morty API to display information about the series' characters.
 
 ---
 
-## 🛠️ Características
+## 🛠️ Features
 
-- **Listado de personajes**: Muestra información como imagen, nombre, especie y ubicación.
-- **Paginación**: Navegación fluida entre diferentes páginas de personajes.
-- **Barra de navegación**: Incluye el nombre de la aplicación.
-- **Pruebas unitarias**: Implementadas con **Jest** y **React Testing Library**.
-- **Análisis de calidad de código**: Usando **SonarCloud** para mantener estándares de calidad.
+- **Character List**: Displays information such as image, name, species, and location.
+- **Pagination**: Smooth navigation between different character pages.
+- **Navigation Bar**: Includes the application name.
+- **Unit Testing**: Implemented with **Jest** and **React Testing Library**.
+- **Code Quality Analysis**: Using **SonarCloud** to maintain quality standards.
 
 ---
 
-## 🚀 Tecnologías utilizadas
+## 🚀 Technologies Used
 
-A continuación, se describen las tecnologías empleadas en el proyecto:
+The following technologies were employed in the project:
 
 1. **React**  
-   Librería JavaScript para construir interfaces de usuario.  
-   Documentación: [React Docs](https://reactjs.org/)
+   A JavaScript library for building user interfaces.  
+   Documentation: [React Docs](https://reactjs.org/)
 
 2. **Axios**  
-   Cliente HTTP basado en promesas para realizar solicitudes a la API de Rick and Morty.  
-   Documentación: [Axios Docs](https://axios-http.com/)
+   A promise-based HTTP client for making requests to the Rick and Morty API.  
+   Documentation: [Axios Docs](https://axios-http.com/)
 
 3. **Jest**  
-   Framework de pruebas unitarias en JavaScript.  
-   Documentación: [Jest Docs](https://jestjs.io/)
+   A JavaScript testing framework for unit testing.  
+   Documentation: [Jest Docs](https://jestjs.io/)
 
 4. **React Testing Library**  
-   Herramienta para pruebas enfocada en cómo los usuarios interactúan con la UI.  
-   Documentación: [React Testing Library Docs](https://testing-library.com/docs/react-testing-library/intro/)
+   A testing tool focused on how users interact with the UI.  
+   Documentation: [React Testing Library Docs](https://testing-library.com/docs/react-testing-library/intro/)
 
 5. **SonarCloud**  
-   Plataforma para análisis de calidad y seguridad del código.  
-   Documentación: [SonarCloud Docs](https://sonarcloud.io/)
+   A platform for code quality and security analysis.  
+   Documentation: [SonarCloud Docs](https://sonarcloud.io/)
 
 6. **Vite**  
-   Herramienta rápida para desarrollo y construcción de proyectos frontend.  
-   Documentación: [Vite Docs](https://vitejs.dev/)
+   A fast build tool for frontend development and production.  
+   Documentation: [Vite Docs](https://vitejs.dev/)
+
 7. **AWS S3**  
-   Servicio de almacenamiento en la nube utilizado para desplegar la aplicación.  
-   Documentación: [AWS S3 Docs](https://aws.amazon.com/s3/)
+   A cloud storage service used to deploy the application.  
+   Documentation: [AWS S3 Docs](https://aws.amazon.com/s3/)
 
 8. **Google Notification Service**  
-   Servicio utilizado para gestionar notificaciones en la aplicación.  
-   Documentación: [Google Notification Service Docs](https://firebase.google.com/docs/cloud-messaging)
+   A service used to manage notifications in the application.  
+   Documentation: [Google Notification Service Docs](https://firebase.google.com/docs/cloud-messaging)
 
 9. **Google API**  
-   API integrada para gestionar notificaciones y obtener datos relevantes para la aplicación.  
-   Documentación: [Google API Docs](https://developers.google.com/apis-explorer)
+   Integrated API to manage notifications and fetch relevant data for the application.  
+   Documentation: [Google API Docs](https://developers.google.com/apis-explorer)
 
 ---
 
-## 🌐 Despliegue
+## 🌐 Deployment
 
-La aplicación está desplegada en **AWS S3 Bucket** y es accesible públicamente desde un dominio configurado.  
-Además, se ha integrado con **Google Notification Service** para enviar notificaciones a los usuarios.
+The application is deployed on **AWS S3 Bucket** and is publicly accessible via a configured domain.  
+Additionally, it integrates **Google Notification Service** to send notifications to users.
+
+### Deployment Strategy: Blue-Green Deployment
+The deployment uses the **Blue-Green Deployment** strategy, ensuring a controlled and secure process for releasing new application versions. This approach includes two main environments:
+
+1. **Development Environment (Blue):**  
+   - Used for testing and validating new features.  
+   - Allows exhaustive testing, including unit and integration tests.  
+   - User Stories (US) are validated and verified in this environment by the QA team, ensuring they meet the defined acceptance criteria.
+
+2. **Production Environment (Green):**  
+   - Once new features are stable and meet the acceptance criteria and QA validations, the application is transitioned to the production environment.  
+   - This minimizes downtime and ensures a seamless transition for end-users.
+
+### Validation Process
+- The development environment serves as a testing space to ensure the stability and functionality of new implementations.  
+- After QA approval and confirmation that the US criteria are met, deployment to production (Green) proceeds.  
+
+This methodology guarantees a stable end-user experience and reduces the risk of production issues.
 
 ---
 
+## 📝 Installation
 
-## 📝 Instalación
+Follow these steps to configure and run the project locally:
 
-Sigue los pasos a continuación para configurar y ejecutar el proyecto en tu máquina local:
-
-1. **Clona el repositorio**:  
+1. **Clone the repository:**  
    ```sh
-   git clone https://github.com/tu-usuario/rick-and-morty-app.git
-2. **Accede al directorio del proyecto**:
+   git clone https://github.com/your-username/rick-and-morty-app.git
+
+2. **Navigate to the project directory:**:
     ```sh
     cd rick-and-morty-app
-3. **Instala las dependencias:**:
+3. **Install dependencies:**:
     ```sh
     npm install
 ---
-## Uso
+## Usage
 
-1. **Inicia la aplicación en modo desarrollo:**:  
+1. **Start the application in development mode:**:  
    ```sh
    npm run dev
 
-2. Abre tu navegador y navega a [http://localhost:3000](http://localhost:3000)
+2. Open your browser and go to [http://localhost:3000](http://localhost:3000)
 
 ---
 
 
-## 📜 Scripts disponibles
+## 📜 Available Scripts
 
 
-- **Inicia la aplicación en modo desarrollo**:  
+- **Start the application in development mode:**:  
    ```sh
    npm run dev
-- **Construye la aplicación para producción.**:
+- **Build the application for production:**:
     ```sh
     npm run build
-- **npm run preview.:**:
+- **Preview the built application:**:
     ```sh
     Previsualiza la aplicación construida.
-- **Ejecuta ESLint para analizar el código.:**:
+- **Run ESLint to analyze the code:**:
     ```sh
     npm run lint
-- **Ejecuta las pruebas unitarias con Jest.:**:
+- **Run unit tests with Jest:**:
     ```sh
     npm run test
 
 ---
 
-## 🧪 Pruebas
+## 🧪 Testing
 
-- **Para ejecutar las pruebas unitarias, usa el siguiente comando:**:  
+- **To run unit tests, use the following command:**:  
    ```sh
    npm run test
 
 ---
-## ⚙️ Configuración de CI/CD
+## ⚙️ CI/CD Configuration
 
-Este proyecto utiliza GitHub Actions y Azure Pipelines para la integración y entrega continua.
+This project uses GitHub Actions and Azure Pipelines for continuous integration and delivery.
 
-- **Los archivos de configuración para GitHub Actions se encuentran en el directorio:**:
+- **GitHub Actions configuration files are located in:**:
     ```sh
     .github/workflows
 
-- **La configuración de Azure Pipelines está en el archivo:**:
+- **Azure Pipelines configuration can be found in:**:
     ```sh
     azure-pipelines.yml
 
 
-## 🤝 Contribuciones
+## 🤝 Contributions
 
-¡Las contribuciones son bienvenidas!
+Contributions are welcome!
 
-Sigue estos pasos para contribuir:
+Follow these steps to contribute:
 
-1. **Crea un fork del repositorio.**:  
+1. **Fork the repository.**:  
 
-2. **Realiza los cambios en una rama nueva.**:
+2. **Make changes in a new branch.**:
 
-3. **Abre un pull request explicando los cambios propuestos.**:
+3. **Open a pull request explaining your proposed changes.**:
 
-Antes de contribuir, por favor abre un issue para discutir cualquier idea que tengas.
+Before contributing, please open an issue to discuss your ideas.
 
 
 ---
 
 
-## 👥 Colaboradores
+## 👥 Contributors
 
-Agradecemos a todas las personas que han contribuido a este proyecto.  
+Thanks to everyone who has contributed to this project.  
 
-| Nombre             | Rol                     | Contacto                     |
+| Name             | Rol                     | Contact                     |
 |--------------------|-------------------------|------------------------------|
-| [LEÓN DENIS DOMÍNGUEZ](#)      | Desarrollador | [GitHub](https://github.com/leondominguez) |
-| [JEAN HEYLLER PALOMINO](#)      | Desarrollador        | [GitHub](https://github.com/jean-heyller) |
+| [LEÓN DENIS DOMÍNGUEZ](#)      | Developer | [GitHub](https://github.com/leondominguez) |
+| [JEAN HEYLLER PALOMINO](#)      | Developer        | [GitHub](https://github.com/jean-heyller) |
 | [CHRISTIAN DANIEL VILLEGAS](#)      | DevOps                 | [GitHub](https://github.com/Blessed0314) |
 | [JUAN MIGUEL ROJAS](#)      | Testing                 | [GitHub](https://github.com/JuanMiguelRojas96) |
-| [MARGARITA  GRISALES TONUZCO](#)      | Desarrolladora                 | [GitHub](https://github.com/MargaritaGrisales) |
-| [DANIEL ARIAS CASTRILLON](#)      | Desarrollador                 | [GitHub](https://github.com/Danii-26) |
+| [MARGARITA  GRISALES TONUZCO](#)      | Developer                 | [GitHub](https://github.com/MargaritaGrisales) |
+| [DANIEL ARIAS CASTRILLON](#)      | Developer                 | [GitHub](https://github.com/Danii-26) |
+| [ZAIRA DANIELA NAVIA](#)      | Developer                 | [GitHub](https://github.com/adz33) |
+| [LESLI ESMITH MARTINEZ](#)      | Developer                 | [GitHub](https://github.com/LesliMartinez) |
 
-Si deseas aparecer en esta lista, ¡contribuye al proyecto y haz tu marca!  
+If you'd like to appear on this list, contribute to the project and leave your mark!  
