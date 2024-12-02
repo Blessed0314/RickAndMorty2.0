@@ -26,7 +26,7 @@ test("renders Navbar and Characters components", async () => {
   render(<App />);
 
   // Verificar que el Navbar se renderiza
-  expect(screen.getByText("Rick and Morty App V2.0")).toBeInTheDocument();
+  expect(screen.getByText("Rick and Morty App V3.0")).toBeInTheDocument();
 
   // Esperar a que los personajes se carguen y verificar que se renderiza un personaje
   await waitFor(() =>
